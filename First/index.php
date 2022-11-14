@@ -15,11 +15,20 @@
     <body>
         <div class="container my-5 text-center" id="login">
             <h1>Login</h1>
-            <form action="login.php" method="post">
+            <form action="./dashboard.php" method="post">
                 Username<br> <input type="text" name="username"><br>
                 Password<br> <input type="password" name="pwd"><br>
                 <br><input type="submit">
             </form>
+            <?php
+                if (isset($_GET['error'])) {
+                    if ($_GET['error'] == 'nologin') {
+                        echo '<br><b style="color: red">Effettua il login con il form</b>';
+                    } else if ($_GET['error'] == 'credentials') {
+                        echo '<br><b style="color: red">Credenziali errate</b>';
+                    }
+                }
+            ?>
         </div>
     </body>
 </html>
