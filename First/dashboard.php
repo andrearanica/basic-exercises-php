@@ -10,13 +10,13 @@
                 require('login.php');
                 if (isset($_POST['username']) || isset($_POST['pwd'])) {
                     if (login($_POST['username'], $_POST['pwd'])) {
-                        echo '<h1>🚀 Benvenuto nella dashboard!</h1>Ciao ' . $_POST['username'] . '. Gli account registrati sono:</p>';
+                        echo '<h1>🚀 Benvenuto nella dashboard!</h1>Ciao <b>' . $_POST['username'] . '</b>. Gli account registrati sono:<br>';
                         $lines = file('accounts.txt');
                         foreach($lines as $line) {
                             echo ($line . '<br>');
                         }
                     } else {
-                        // header('Location: ./index.php?error=credentials');
+                        header('Location: ./index.php?error=credentials');
                     }
                 } else {
                     header('Location: ./index.php?error=nologin');
