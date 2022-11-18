@@ -15,7 +15,7 @@
     <body>
         <div class="container my-5 text-center" id="login">
             <h1>Login</h1>
-            <form action="./dashboard.php" method="post">
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post">
                 Username<br> <input type="text" name="username"><br>
                 Password<br> <input type="password" name="pwd"><br>
                 <br><input type="submit">
