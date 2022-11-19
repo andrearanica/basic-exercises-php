@@ -1,10 +1,1 @@
-[
-    {
-        "email": "andrea@gmail.com",
-        "password": "password"
-    },
-    {
-        "email": "marco@outlook.com",
-        "password": "marco12"
-    }
-]
+[{"email":"andrea@gmail.com","password":"password"},{"email":"marco@outlook.com","password":"marco12"},{"email":"a@a","password":"password","cf":"ciao","cell":"035"},{"email":"rranica@alice.it","password":"andrea","cf":"rncndr","cell":"035"},{"email":"sararanica@gmail.com","password":"5bd537fc3789b5482e4936968f0fde95","cf":"sara","cell":"035"}]
