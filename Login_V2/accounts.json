@@ -1,1 +1,20 @@
-[{"email":"andrea@gmail.com","password":"password"},{"email":"marco@outlook.com","password":"marco12"},{"email":"a@a","password":"password","cf":"ciao","cell":"035"},{"email":"rranica@alice.it","password":"andrea","cf":"rncndr","cell":"035"},{"email":"sararanica@gmail.com","password":"5bd537fc3789b5482e4936968f0fde95","cf":"sara","cell":"035"}]
+[
+	{
+		"email": "tia@itipaleocapa.eu",
+		"password": "5bd537fc3789b5482e4936968f0fde95",
+		"cf": "mttrcc",
+		"cell": "035592413"
+	},
+	{
+		"email": "andrea@gmail.com",
+		"password": "6e6bc4e49dd477ebc98ef4046c067b5f",
+		"cf": "RNCNDR",
+		"cell": "3407663812"
+	},
+	{
+		"email": "prova@a.a",
+		"password": "0cc175b9c0f1b6a831c399e269772661",
+		"cf": "PRVXXX",
+		"cell": "646"
+	}
+]

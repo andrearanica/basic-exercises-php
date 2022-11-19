@@ -50,26 +50,28 @@ class User {
 
 // Returns the login form
 function form ($error) {
-    $header = '<div class="container my-5">';
+    //$header = '<div class="container my-5">';
     $body = '<h1>⚙️ Login</h1><form action="index.php" method="post"><input name="email" type="email" placeholder="Email"><input name="password" type="password" placeholder="Password"><input type="submit"></form><a href="signup.php">Registrati</a><br>';
     if ($error) { $body = $body . '<b>Credenziali sbagliate</b>'; }
-    $footer = '</div>';
-    return $header . $body . $footer;
+    //$footer = '</div>';
+    return $body;
 }
 
 function signupForm () {
-    return '<form action="signup.php" method="post">
-    <input type="email" name="email" placeholder="Email"><br>
-    <input type="password" name="password" placeholder="Password"><br>
-    <input type="text" name="cf" placeholder="Codice fiscale"><br>
-    <input type="text" name="cell" placeholder="Cellulare"><br>
-    <input type="submit">
-    </form>';
+    return '
+    <form action="signup.php" method="post">
+        <input type="email" name="email" placeholder="Email"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <input type="text" name="cf" placeholder="Codice fiscale"><br>
+        <input type="text" name="cell" placeholder="Cellulare"><br>
+        <input type="submit">
+    </form>
+    ';
 }
 
 // Returns the dashboard
 function dashboard () {
-    return '<div class="container my-5"><h1>🥳 Benvenuto!</h1></div>';
+    return '<h1>🥳 Benvenuto!</h1>';
 }
 
 function validateData (&$data) {
@@ -92,6 +94,15 @@ function login ($email, $password) {
     return false;
 }
 
+function checkEmail ($email, $users) {
+    foreach ($users as $user) {
+        if ($user->email == $email) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function register ($email, $password, $cf, $cell) {
     validateData($email); validateData($password); validateData($cf); validateData($cell);
     
@@ -100,10 +111,13 @@ function register ($email, $password, $cf, $cell) {
     $file = fopen('accounts.json', 'r');
     $json = fread($file, filesize('accounts.json'));
     $json = json_decode($json);
-    array_push($json, $user);
 
-    $json = json_encode($json);
-    file_put_contents('accounts.json', $json);
+    if (checkEmail($email, $json)) {
+        array_push($json, $user);
+
+        $json = json_encode($json);
+        file_put_contents('accounts.json', $json);
+    }
 }
 
 ?>
