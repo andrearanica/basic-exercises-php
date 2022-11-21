@@ -24,7 +24,7 @@
                         if ($_GET['error'] == 'alreadyused') {
                             echo '<b>Email o codice fiscale già utilizzati</b>';
                         } else {
-                            echo 'C\'è stato un errore, riprova più tardi';
+                            echo '<b>C\'è stato un errore, riprova più tardi</b>';
                         }
                     }
                 }
