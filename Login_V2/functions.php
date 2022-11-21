@@ -52,7 +52,7 @@ class User {
 function form ($error) {
     //$header = '<div class="container my-5">';
     $body = '<h1>⚙️ Login</h1><form action="index.php" method="post"><input name="email" type="email" placeholder="Email"><input name="password" type="password" placeholder="Password"><input type="submit"></form><a href="signup.php">Registrati</a><br>';
-    if ($error) { $body = $body . '<b>Credenziali sbagliate</b>'; }
+    if ($error) { $body = $body . '<b>' . $error . '</b>'; }
     //$footer = '</div>';
     return $body;
 }
@@ -103,6 +103,15 @@ function checkEmail ($email, $users) {
     return true;
 }
 
+function checkCf ($cf, $users) {
+    foreach ($users as $user) {
+        if ($user->cf == $cf) {
+            return false;
+        }
+    }
+    return true;
+}
+
 function register ($email, $password, $cf, $cell) {
     validateData($email); validateData($password); validateData($cf); validateData($cell);
     
@@ -112,11 +121,15 @@ function register ($email, $password, $cf, $cell) {
     $json = fread($file, filesize('accounts.json'));
     $json = json_decode($json);
 
-    if (checkEmail($email, $json)) {
+    if (checkEmail($email, $json) && checkCf($cf, $json)) {
         array_push($json, $user);
 
         $json = json_encode($json);
         file_put_contents('accounts.json', $json);
+
+        return true;
+    } else {
+        return false;
     }
 }
 

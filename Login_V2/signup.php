@@ -9,11 +9,24 @@
             <h1>🚀 Registrati</h1>
             <?php
                 require("functions.php");
+                // Register user if data is ok
                 if (isset($_POST['email'])) {
-                    register($_POST['email'], md5($_POST['password']), $_POST['cf'], $_POST['cell']);
-                    header('Location: index.php');
+                    if (register($_POST['email'], md5($_POST['password']), $_POST['cf'], $_POST['cell'])) {
+                        header('Location: index.php');
+                    } else {
+                        header('Location: signup.php?error=alreadyused');
+                    }
+                // Show the form
                 } else {
                     echo signupForm();
+                    // Check for errors
+                    if (isset($_GET['error'])) {
+                        if ($_GET['error'] == 'alreadyused') {
+                            echo '<b>Email o codice fiscale già utilizzati</b>';
+                        } else {
+                            echo 'C\'è stato un errore, riprova più tardi';
+                        }
+                    }
                 }
             ?>
         </div>

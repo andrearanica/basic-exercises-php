@@ -15,13 +15,21 @@
                 if (login($_POST['email'], $_POST['password'])) {
                     echo dashboard();
                 } else {
-                    header('Location: ' . $_SERVER["PHP_SELF"] . '?error=login');
+                    header('Location: ' . $_SERVER['PHP_SELF'] . '?error=login');
                 }
             // Show the login 
             } else {
                 // Check to show error
-                if (isset($_GET['error'])) { $form = form(true); }
-                else { $form = form(false); }
+                if (isset($_GET['error'])) {
+                    // Show the form with error
+                    if ($_GET['error'] == 'login') {
+                        $form = form('Credenziali sbagliate');
+                    } else {
+                        $form = form('C\'è stato un errore, prova più tardi');
+                    }
+                } else { 
+                    $form = form(false); 
+                }
                 echo $form;
             }
         ?>
