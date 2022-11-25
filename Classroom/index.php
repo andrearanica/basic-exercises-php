@@ -31,6 +31,8 @@
                     if (isset($_GET['error'])) { 
                         if ($_GET['error'] == 'credentials') {
                             echo '<div class="alert alert-danger my-5">Credenziali errate</div>';
+                        } else {
+                            echo '<div class="alert alert-danger my-5">C\'è stato un errore, riprova</div>';
                         }
                     }
                 }
