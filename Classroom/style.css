@@ -1,0 +1,11 @@
+input {
+    width: 50%;
+    margin: auto;
+    margin-top: 5px;
+}
+
+#class, #section {
+    width: 25%;
+    margin: auto;
+    margin-top: 5px;
+}
