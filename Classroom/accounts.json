@@ -1,18 +1,1 @@
-[
-    {
-        "name": "Gabriele",
-        "surname": "Previtali",
-        "email": "gabrieleprevitali@gmail.com",
-        "password": "gabrieleprevitali",
-        "class": "5",
-        "section": "ID"
-    },
-    {
-        "name": "Stefano",
-        "surname": "Pezzotta",
-        "email": "stefanopezzotta@gmail.com",
-        "password": "stefanopezzotta",
-        "class": "5",
-        "section": "ID"
-    }
-]
+[{"name":"Gabriele","surname":"Previtali","email":"gabrieleprevitali@gmail.com","password":"gabrieleprevitali","class":"5","section":"ID"},{"name":"Stefano","surname":"Pezzotta","email":"stefanopezzotta@gmail.com","password":"stefanopezzotta","class":"5","section":"ID"},{"name":"Marco","surname":"Bassi","email":"marcobassi@gmail.com","password":"marcobassi","class":"4IE"},{"name":"a","surname":"a","email":"a@b","password":"a","class":"a"}]
