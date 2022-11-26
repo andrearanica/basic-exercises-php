@@ -15,10 +15,20 @@
                 }
                 echo '</div></center>';
             ?>
+        
+            <?php
+                if (isset($_GET['error'])) {
+                    if ($_GET['error'] == 'null') {
+                        echo '<div class="alert alert-success my-5 text-center">Caricamento avvenuto con <b>successo</b></div>';
+                    } else {
+                        echo '<div class="alert alert-warning my-5 text-center">C\'è stato un <b>errore</b>, riprova</div>';
+                    }
+                }
+            ?>
+            <form class="text-center" action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="file">
+                <input type="submit" name="upload" value="Carica file">
+            </form>
         </div>
-        <form class="text-center" action="upload.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="file">
-            <input type="submit" name="upload" value="Carica file">
-        </form>
     </body>
 </html>
