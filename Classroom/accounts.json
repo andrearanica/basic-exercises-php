@@ -35,5 +35,19 @@
 		"email": "marcosalvi@gmail.com",
 		"password": "caa18c4391a485035f1818240a7b2d26",
 		"class": "5IA"
+	},
+	{
+		"name": "Simone",
+		"surname": "Milesi",
+		"email": "simonemilesi@gmail.com",
+		"password": "32554f60e25015899252455ed8652f7c",
+		"class": "5ID"
+	},
+	{
+		"name": "Manuel",
+		"surname": "Riva",
+		"email": "manuelriva@gmail.com",
+		"password": "51dfe20ba493bdb54b8fc1e4449da326",
+		"class": "5ID"
 	}
 ]

@@ -23,6 +23,8 @@
                             echo '<div class="alert alert-danger my-5 text-center"><b>Credenziali errate</b></div>';
                         } else if ($_GET['error'] == 'invalidinput') {
                             echo '<div class="alert alert-danger my-5 text-center"><b>Account non creato</b> | Dati mancanti</div>';  
+                        } else if ($_GET['error'] == 'null') {
+                            echo '<div class="alert alert-success my-5 text-center"><b>Account registrato</b>, effettua il login per continuare</div>';
                         } else {
                             echo '<div class="alert alert-danger my-5 text-center">C\'è stato un errore, <b>riprova</b></div>';
                         }

@@ -54,8 +54,9 @@ function checkInput () {
     }
 }
 
-function writeAccount () {
-    $user = new User($_GET['name'], $_GET['surname'], $_GET['email'], md5($_GET['password']), $_GET['class']);
+function writeAccount ($name, $surname, $email, $password, $class) {
+    validateData($name); validateData($surname); validateData($email); validateData($password); validateData($class);
+    $user = new User($name, $surname, $email, md5($password), $class);
     
     $file = fopen('accounts.json', 'r');
     $json = fread($file, filesize('accounts.json'));
