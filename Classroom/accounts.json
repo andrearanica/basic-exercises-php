@@ -1,1 +1,39 @@
-[{"name":"Gabriele","surname":"Previtali","email":"gabrieleprevitali@gmail.com","password":"gabrieleprevitali","class":"5","section":"ID"},{"name":"Stefano","surname":"Pezzotta","email":"stefanopezzotta@gmail.com","password":"stefanopezzotta","class":"5","section":"ID"},{"name":"Marco","surname":"Bassi","email":"marcobassi@gmail.com","password":"marcobassi","class":"4IE"},{"name":"a","surname":"a","email":"a@b","password":"a","class":"a"}]
+[
+	{
+		"name": "Gabriele",
+		"surname": "Previtali",
+		"email": "gabrieleprevitali@gmail.com",
+		"password": "fad09f292b80158153f488996c27fac0",
+		"class": "5",
+		"section": "ID"
+	},
+	{
+		"name": "Stefano",
+		"surname": "Pezzotta",
+		"email": "stefanopezzotta@gmail.com",
+		"password": "9ac549902937e9f32e65340cca8ed144",
+		"class": "5",
+		"section": "ID"
+	},
+	{
+		"name": "Marco",
+		"surname": "Bassi",
+		"email": "marcobassi@gmail.com",
+		"password": "8b01d09d81b6fbb1a843dbe0318c01d1",
+		"class": "4IE"
+	},
+	{
+		"name": "Loris",
+		"surname": "Rota",
+		"email": "lorisrota@gmail.com",
+		"password": "0c1c5d83d8c291794a19165dff417b15",
+		"class": "5ID"
+	},
+	{
+		"name": "Marco",
+		"surname": "Salvi",
+		"email": "marcosalvi@gmail.com",
+		"password": "caa18c4391a485035f1818240a7b2d26",
+		"class": "5IA"
+	}
+]

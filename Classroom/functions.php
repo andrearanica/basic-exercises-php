@@ -55,7 +55,7 @@ function checkInput () {
 }
 
 function writeAccount () {
-    $user = new User($_GET['name'], $_GET['surname'], $_GET['email'], $_GET['password'], $_GET['class']);
+    $user = new User($_GET['name'], $_GET['surname'], $_GET['email'], md5($_GET['password']), $_GET['class']);
     
     $file = fopen('accounts.json', 'r');
     $json = fread($file, filesize('accounts.json'));
@@ -77,7 +77,7 @@ function login ($email, $password) {
     $json = fread($file, filesize('accounts.json'));
     $json = json_decode($json);
     foreach ($json as &$value) {
-        if ($email == $value->email && $password == $value->password) {
+        if ($email == $value->email && md5($password) == $value->password) {
             return true;
         }
     }
