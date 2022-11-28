@@ -10,8 +10,8 @@
         <?php
             require('functions.php');
             if (!isset($_GET['register'])) {
-                if (isset($_GET['email'])) {
-                    if (login($_GET['email'], $_GET['password'])) {
+                if (isset($_POST['email'])) {
+                    if (login($_POST['email'], $_POST['password'])) {
                         header('Location: dashboard.php');
                     } else {
                         header('Location: index.php?error=credentials');

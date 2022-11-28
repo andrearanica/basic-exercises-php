@@ -2,7 +2,7 @@
     require('functions.php');
     
     if (checkInput()) {
-        writeAccount($_GET['name'], $_GET['surname'], $_GET['email'], $_GET['password'], $_GET['class']);
+        writeAccount($_POST['name'], $_POST['surname'], $_POST['email'], $_POST['password'], $_POST['class']);
         header('Location: index.php?error=null');
     } else {
         header('Location: index.php?error=invalidinput');
