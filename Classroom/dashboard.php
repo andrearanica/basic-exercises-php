@@ -10,7 +10,7 @@
                 echo '<center><div class="row">';
                 foreach(scandir('./images') as $img) {
                     if ($img != '.' && $img != '..') {
-                        echo '<div class="col my-1"><img height="200" src="./images/' . $img . '"></div>';
+                        echo '<div class="col my-1"><img height="200" src="./images/' . $img . '"><form action="delete.php" method="get"><input type="submit" class="btn btn-danger" name="file" value="' . $img . '"></form></div>';
                     }
                 }
                 echo '</div></center>';

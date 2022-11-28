@@ -21,7 +21,7 @@ class User {
 function showLogin () {
     echo '
     <h1>⚙️ Login</h1>
-    <form action="index.php" method="GET">
+    <form action="index.php" method="POST">
         <input type="email"     id="email"    name="email"      class="form-control" placeholder="Email">
         <input type="password"  id="password" name="password"   class="form-control" placeholder="Password">
         <input type="submit"    id="button"   class="form-control" id="classe">
@@ -35,7 +35,7 @@ function showLogin () {
 function showSignup () {
     echo '
     <h1>🔎 Registrazione</h1>
-    <form action="signup.php" method="GET">
+    <form action="signup.php" method="POST">
         <input type="text"     name="name"    id="name"     class="form-control" placeholder="Nome">
         <input type="text"     name="surname" id="surname"  class="form-control" placeholder="Cognome">
         <input type="email"    name="email"   id="email"    class="form-control" placeholder="Email">
@@ -47,7 +47,7 @@ function showSignup () {
 }
 
 function checkInput () {
-    if ($_GET['name'] != "" && $_GET['surname'] != "" && $_GET['email'] != "" && $_GET['password'] != "" && $_GET['class'] != "") {
+    if ($_POST['name'] != "" && $_POST['surname'] != "" && $_POST['email'] != "" && $_POST['password'] != "" && $_POST['class'] != "") {
         return true;
     } else {
         return false;
