@@ -47,7 +47,7 @@ function showSignup () {
 }
 
 function checkInput () {
-    if ($_POST['name'] != "" && $_POST['surname'] != "" && $_POST['email'] != "" && $_POST['password'] != "" && $_POST['class'] != "") {
+    if ($_POST['name'] != "" && $_POST['surname'] != "" && $_POST['email'] != "" && $_POST['password'] != "" && preg_match("/[1-5][A-Z][A-Z]/", $_POST['class'])) {
         return true;
     } else {
         return false;

@@ -21,8 +21,6 @@
                     if (isset($_GET['error'])) { 
                         if ($_GET['error'] == 'credentials') {
                             echo '<div class="alert alert-danger my-5 text-center"><b>Credenziali errate</b></div>';
-                        } else if ($_GET['error'] == 'invalidinput') {
-                            echo '<div class="alert alert-danger my-5 text-center"><b>Account non creato</b> | Dati mancanti</div>';  
                         } else if ($_GET['error'] == 'null') {
                             echo '<div class="alert alert-success my-5 text-center"><b>Account registrato</b>, effettua il login per continuare</div>';
                         } else {
@@ -32,6 +30,11 @@
                 }
             } else {
                 showSignup();
+                if (isset($_GET['error'])) {
+                    if ($_GET['error'] == 'invalidinput') {
+                        echo '<div class="alert alert-danger my-5 text-center"><b>Account non creato</b> | Dati mancanti o errati</div>';  
+                    }
+                }
             }
         ?>
         </div>
