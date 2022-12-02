@@ -23,11 +23,12 @@
                     } else if($_GET['error'] == 'filename') {
                         echo '<div class="alert alert-danger my-5 text-center">E\' già presente un file con questo nome</div>';
                     } else {
-                        echo '<div class="alert alert-warning my-5 text-center">C\'è stato un <b>errore</b>, riprova</div>';
+                        echo '<div class="alert alert-warning my-5 text-center"><b>Seleziona un file</b> prima di caricare</div>';
                     }
                 }
             ?>
             <form class="text-center" action="upload.php" method="post" enctype="multipart/form-data">
+                <input type="text" name="name" class="form-control " placeholder="Inserisci il tuo nome"><br />
                 <input type="file" name="file">
                 <input type="submit" name="upload" value="Carica file">
             </form>
