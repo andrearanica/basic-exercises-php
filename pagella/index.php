@@ -83,7 +83,7 @@
             if (isset($_REQUEST['student_id'])) {
                 echo '<form method="GET" action="index.php" class="my-4">
                     <input name="student_id" value="' . $_REQUEST["student_id"] . '" type="number" hidden>
-                    <input name="mark"       placeholder="Voto" type="number">
+                    <input name="mark"       placeholder="Voto">
                     <input name="subject"    placeholder="Materia">
                     <input type="submit">
                 </form>';
@@ -121,19 +121,27 @@
                 $sql = 'SELECT subject, AVG(mark) FROM `marks` WHERE student_id=' . $_REQUEST['student_id'] . ' GROUP BY subject';
                 $result = $connection->query($sql);
                 $insufficiencies = 0;
+                $rInsufficiencies = 0;
                 if ($result->num_rows > 0) {
+                    echo '<center><table><th>Materia</th><th>Media aritmetica</th><th>Media arrotondata</th>';
                     while ($row = $result->fetch_assoc()) {
-                        echo '<p class="my-1">' . $row['subject'] . ': ' . round($row['AVG(mark)'], 3) . ' | <b>' . round($row['AVG(mark)']) . '</b></p>';
+                        echo '<tr>';
+                        echo '<td>' . $row['subject'] . '</td><td>' . round($row['AVG(mark)'], 3) . '</td><td>' . round($row['AVG(mark)']) . '</td>';
+                        echo '</tr>';
                         if ($row['AVG(mark)'] < 6) {
                             $insufficiencies++;
                         }
+                        if (round($row['AVG(mark)']) < 6) {
+                            $rInsufficiencies++;
+                        }
                     }
+                    echo '</table></center>';
                 }
 
                 if ($insufficiencies > 3) {
                     echo '<div class="alert alert-danger my-4"><b>Questo studente è bocciato</b></div>';
                 } else if ($insufficiencies > 0) {
-                    echo '<div class="alert alert-warning my-4"><b>Questo studente è rimandato in ' . $insufficiencies . ' materie</b></div>';
+                    echo '<div class="alert alert-warning my-4"><b>Questo studente è rimandato in ' . $insufficiencies . ' materie</b> secondo la media aritmetica, o in <b>' . $rInsufficiencies . ' materie</b> secondo la media arrotondata</div>';
                 } else {
                     echo '<div class="alert alert-success my-4"><b>Questo studente è promosso</b></div>';
                 }
