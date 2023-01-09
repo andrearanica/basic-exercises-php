@@ -74,9 +74,50 @@
                 } else {
                     echo '<div class="alert alert-warning my-4">Non è stato trovato nessun voto per questo alunno</div>';
                 }
+            }
 
-                echo '<h4>Pagella</h4>';
+            ?>
 
+            <?php
+
+            if (isset($_REQUEST['student_id'])) {
+                echo '<form method="GET" action="index.php" class="my-4">
+                    <input name="student_id" value="' . $_REQUEST["student_id"] . '" type="number" hidden>
+                    <input name="mark"       placeholder="Voto" type="number">
+                    <input name="subject"    placeholder="Materia">
+                    <input type="submit">
+                </form>';
+            }
+
+            ?>
+
+            <?php
+
+            if (isset($_REQUEST['mark'])) {
+                if ($_REQUEST['mark'] != '' && $_REQUEST['subject'] != '') {
+
+                
+                    $ip = '127.0.0.1';
+                    $username = 'root';
+                    $pwd = '';
+                    $database = 'pagella';
+                    $connection = new mysqli($ip, $username, $pwd, $database);
+
+                    if ($connection->connect_error) {
+                        die('C\'è stato un errore: ' . $connection->connect_error);
+                    }
+
+                    $sql = "INSERT INTO marks (mark, student_id, subject) VALUES ('" . $_REQUEST['mark'] . "', '" . $_REQUEST['student_id'] . "', '" . $_REQUEST['subject'] . "');";
+                    $connection->query($sql);
+                    header('Location: index.php?student_id=' . $_REQUEST['student_id']);
+                } else {
+                    echo '<div class="alert alert-danger my-4">Inserisci i dati correttamente</div>';
+                }
+            }
+
+            echo '<h4>Pagella</h4>';
+
+            if (isset($_REQUEST['student_id'])) {
                 $sql = 'SELECT subject, AVG(mark) FROM `marks` WHERE student_id=' . $_REQUEST['student_id'] . ' GROUP BY subject';
                 $result = $connection->query($sql);
                 $insufficiencies = 0;
@@ -90,13 +131,12 @@
                 }
 
                 if ($insufficiencies > 3) {
-                    echo '<div class="alert alert-danger my-4"><b>Questo studente è stato bocciato</b></div>';
+                    echo '<div class="alert alert-danger my-4"><b>Questo studente è bocciato</b></div>';
                 } else if ($insufficiencies > 0) {
-                    echo '<div class="alert alert-warning my-4"><b>Questo studente è stato rimandato in ' . $insufficiencies . ' materie</b></div>';
+                    echo '<div class="alert alert-warning my-4"><b>Questo studente è rimandato in ' . $insufficiencies . ' materie</b></div>';
                 } else {
-                    echo '<div class="alert alert-success my-4"><b>Questo studente è stato promosso</b></div>';
+                    echo '<div class="alert alert-success my-4"><b>Questo studente è promosso</b></div>';
                 }
-
             }
 
             ?>
