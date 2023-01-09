@@ -3,12 +3,51 @@
     <head>
         <title>Registro elettronico</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <style>
+            th, td {
+                border: 2px solid black;
+                padding: 10px;
+                text-align: center;
+            }
+        </style>
     </head>
     <body>
         <div class="container my-5 text-center">
-        <form method="GET" action="index.php">
-            <select name="student_id" class="form-control my-1">
-                <?php
+            <h1>Seleziona uno studente</h1>
+            <form method="GET" action="index.php">
+                <select name="student_id" class="form-control my-1">
+                    <?php
+
+                    $ip = '127.0.0.1';
+                    $username = 'root';
+                    $pwd = '';
+                    $database = 'pagella';
+                    $connection = new mysqli($ip, $username, $pwd, $database);
+
+                    if ($connection->connect_error) {
+                        die('C\'è stato un errore: ' . $connection->connect_error);
+                    }
+
+                    // echo 'Database collegato';
+                    $sql = 'SELECT student_id, name_surname FROM students WHERE class="5ID"';
+                    $result = $connection->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<option value="' . $row['student_id'] . '">' . $row['name_surname'] . '</option>';
+                        }
+                    } else {
+                        echo '<div class="alert alert-danger">Nessuno studente trovato</div>';
+                    }
+
+                    ?>
+                </select>
+                <input type="submit" class="form-control my-1" />
+            </form><br /><hr /><br />
+            <?php
+
+            if (isset($_REQUEST['student_id'])) {
+                echo '<h4>Tutti i voti</h4>';
 
                 $ip = '127.0.0.1';
                 $username = 'root';
@@ -21,55 +60,46 @@
                 }
 
                 // echo 'Database collegato';
-                $sql = 'SELECT nome_cognome, id_studente FROM studenti WHERE classe="5ID"';
+                $sql = 'SELECT mark, subject FROM marks WHERE student_id="' . $_REQUEST['student_id'] . '"';
                 $result = $connection->query($sql);
 
                 if ($result->num_rows > 0) {
+                    echo '<center><table class="my-4"><tr><th>Materia</th><th>Voto</th></tr>';
                     while ($row = $result->fetch_assoc()) {
-                        echo '<option value="' . $row['id_studente'] . '">' . $row['nome_cognome'] . '</option>';
+                        echo '<tr>';
+                        echo '<td>' . $row['subject'] . '</td><td>' . $row['mark'] . '</td>';
+                        echo '</tr>';
+                    }
+                    echo '</table></center>';
+                } else {
+                    echo '<div class="alert alert-warning my-4">Non è stato trovato nessun voto per questo alunno</div>';
+                }
+
+                echo '<h4>Pagella</h4>';
+
+                $sql = 'SELECT subject, AVG(mark) FROM `marks` WHERE student_id=' . $_REQUEST['student_id'] . ' GROUP BY subject';
+                $result = $connection->query($sql);
+                $insufficiencies = 0;
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo '<p class="my-1">' . $row['subject'] . ': ' . round($row['AVG(mark)'], 3) . ' | <b>' . round($row['AVG(mark)']) . '</b></p>';
+                        if ($row['AVG(mark)'] < 6) {
+                            $insufficiencies++;
+                        }
                     }
                 }
 
-                ?>
-            </select>
-            <input type="submit" class="form-control my-1" />
-        </form>
-        <?php
-
-        if (isset($_REQUEST['student_id'])) {
-            $ip = '127.0.0.1';
-            $username = 'root';
-            $pwd = '';
-            $database = 'pagella';
-            $connection = new mysqli($ip, $username, $pwd, $database);
-
-            if ($connection->connect_error) {
-                die('C\'è stato un errore: ' . $connection->connect_error);
-            }
-
-            // echo 'Database collegato';
-            $sql = 'SELECT voto, materia FROM voti WHERE id_studente="' . $_REQUEST['student_id'] . '"';
-            $result = $connection->query($sql);
-
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<p>' . $row['materia'] . ': ' . $row['voto'] . '</p>';
+                if ($insufficiencies > 3) {
+                    echo '<div class="alert alert-danger my-4"><b>Questo studente è stato bocciato</b></div>';
+                } else if ($insufficiencies > 0) {
+                    echo '<div class="alert alert-warning my-4"><b>Questo studente è stato rimandato in ' . $insufficiencies . ' materie</b></div>';
+                } else {
+                    echo '<div class="alert alert-success my-4"><b>Questo studente è stato promosso</b></div>';
                 }
+
             }
 
-            echo '<h1>Pagella</h1>';
-
-            $sql = 'SELECT materia, AVG(voto) FROM `voti` WHERE id_studente=' . $_REQUEST['student_id'] . ' GROUP BY materia ';
-            $result = $connection->query($sql);
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<p>' . $row['materia'] . ': ' . $row['AVG(voto)'] . '</p>';
-                }
-            }
-
-        }
-
-        ?>
+            ?>
         </div>
     </body>
 </html>
