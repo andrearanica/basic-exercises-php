@@ -81,6 +81,7 @@
             <?php
 
             if (isset($_REQUEST['student_id'])) {
+                echo '<h4>Inserisci un voto</h4>';
                 echo '<form method="GET" action="index.php" class="my-4">
                     <input name="student_id" value="' . $_REQUEST["student_id"] . '" type="number" hidden>
                     <input name="mark"       placeholder="Voto">
