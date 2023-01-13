@@ -117,9 +117,9 @@
                 }
             }
 
-            echo '<h4>Pagella</h4>';
-
             if (isset($_REQUEST['student_id'])) {
+                echo '<h4>Pagella</h4>';
+
                 $sql = 'SELECT subject, AVG(mark) FROM `marks` WHERE student_id=' . $_REQUEST['student_id'] . ' GROUP BY subject';
                 $result = $connection->query($sql);
                 $insufficiencies = 0;
@@ -143,7 +143,7 @@
                 if ($insufficiencies > 3) {
                     echo '<div class="alert alert-danger my-4"><b>Questo studente è bocciato</b></div>';
                 } else if ($insufficiencies > 0) {
-                    echo '<div class="alert alert-warning my-4"><b>Questo studente è rimandato in ' . $insufficiencies . ' materie</b> secondo la media aritmetica, o in <b>' . $rInsufficiencies . ' materie</b> secondo la media arrotondata</div>';
+                    echo '<div class="alert alert-warning my-4"><b>Questo studente è rimandato in ' . $insufficiencies . ' materie</b> secondo la media aritmetica o in <b>' . $rInsufficiencies . ' materie</b> secondo la media arrotondata</div>';
                 } else {
                     echo '<div class="alert alert-success my-4"><b>Questo studente è promosso</b></div>';
                 }
